@@ -57,101 +57,117 @@ function tableCalculation(){
     var deadInc = $('#deadIncrease').val();
     var benchInc = $('#benchIncrease').val();
     var squatInc = $('#squatIncrease').val();
-
-    if($('#four_day_table').is(':hidden')){ //does it for 4 day table if it's visible
+    
+    var oneMax = {
+      weekOne: function(lift, increase){return Math.round(lift * 0.65) + '<br>' + Math.round(lift * 0.75) + '<br>' + Math.round(lift * 0.85);},
+      weekTwo: function(lift, increase){return Math.round(lift * 0.7) + '<br>' + Math.round(lift * 0.8) + '<br>' + Math.round(lift * 0.9);},
+      weekThree: function(lift, increase){return Math.round(lift * 0.75) + '<br>' + Math.round(lift * 0.85) + '<br>' + Math.round(lift * 0.95);},
+    };
+    var threeMax = {
+      weekOne: function(lift, increase){return Math.round(lift * 0.65) + '<br>' + Math.round(lift * 0.75) + '<br>' + Math.round(lift * 0.85);},
+      weekTwo: function(lift, increase){return Math.round(lift * 0.7) + '<br>' + Math.round(lift * 0.8) + '<br>' + Math.round(lift * 0.9);},
+      weekThree: function(lift, increase){return Math.round((Number(lift) + Number(increase)) * 0.65) + '<br>' + Math.round((Number(lift) + Number(increase)) * 0.75) + '<br>' + Math.round((Number(lift) + Number(increase)) * 0.85);}
+    };
+    var fiveMax = {
+      weekOne: function(lift, increase){return Math.round((lift * 0.65)) + '<br>' + Math.round((lift * 0.75)) + '<br>' + Math.round((lift * 0.85));},
+      weekTwo: function(lift, increase){return Math.round((Number(lift) + Number(increase)) * 0.65) + '<br>' + Math.round((Number(lift) + Number(deadInc)) * 0.75) + '<br>' + Math.round((Number(lift) + Number(increase)) * 0.85);},
+      weekThree: function(lift, increase){return Math.round((Number(lift) + Number(increase) * 2) * 0.65) + '<br>' + Math.round((Number(lift) + Number(increase) * 2) * 0.75) + '<br>' + Math.round((Number(lift) + Number(increase) * 2) * 0.85);}
+    };
+console.log(deadMax);
+    if($('#four_day_table').is(':hidden')){ //does it for 3 day table if it's visible
         switch($('input[name=repMax]:checked').attr('id')){ //checks radio button value for switch case to determine which rep max system to fill in
         case "oneMax":
-            $('#dead_3week_1').html(Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85))); //puts in the three working rep numbers, one on each line, rounded to a whole number
-            $('#dead_3week_2').html(Math.round((deadMax * 0.7)) + '<br>' + Math.round((deadMax * 0.8)) + '<br>' + Math.round((deadMax * 0.9)));
-            $('#dead_3week_3').html(Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)) + '<br>' + Math.round((deadMax * 0.95)));
+            $('#dead_3week_1').html(oneMax.weekOne(deadMax, deadInc)); //puts in the three working rep numbers, one on each line, rounded to a whole number
+            $('#dead_3week_2').html(oneMax.weekTwo(deadMax, deadInc));
+            $('#dead_3week_3').html(oneMax.weekThree(deadMax, deadInc));
+
+            $('#bench_3week_1').html(oneMax.weekOne(benchMax, benchInc));
+            $('#bench_3week_2').html(oneMax.weekTwo(benchMax, benchInc));
+            $('#bench_3week_3').html(oneMax.weekThree(benchMax, benchInc));
             
-            $('#bench_3week_1').html(Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_3week_2').html(Math.round((benchMax * 0.7)) + '<br>' + Math.round((benchMax * 0.8)) + '<br>' + Math.round((benchMax * 0.9)));
-            $('#bench_3week_3').html(Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)) + '<br>' + Math.round((benchMax * 0.95)));
-            
-            $('#squat_3week_1').html(Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_3week_2').html(Math.round((squatMax * 0.7)) + '<br>' + Math.round((squatMax * 0.8)) + '<br>' + Math.round((squatMax * 0.9)));
-            $('#squat_3week_3').html(Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)) + '<br>' + Math.round((squatMax * 0.95)));
+            $('#squat_3week_1').html(oneMax.weekOne(squatMax, squatInc));
+            $('#squat_3week_2').html(oneMax.weekTwo(squatMax, squatInc));
+            $('#squat_3week_3').html(oneMax.weekThree(squatMax, squatInc));
             break;
         case "threeMax":
-            $('#dead_3week_1').html( Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)));
-            $('#dead_3week_2').html( Math.round((deadMax * 0.7)) + '<br>' + Math.round((deadMax * 0.8)) + '<br>' + Math.round((deadMax * 0.9)));
-            $('#dead_3week_3').html( Math.round(((Number(deadMax) + Number(deadInc)) * 0.65)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.85))); //same thing but adds on the weight increase
-
-            $('#bench_3week_1').html( Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_3week_2').html( Math.round((benchMax * 0.7)) + '<br>' + Math.round((benchMax * 0.8)) + '<br>' + Math.round((benchMax * 0.9)));
-            $('#bench_3week_3').html( Math.round(((Number(benchMax) + Number(benchInc)) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.85)));
-
-            $('#squat_3week_1').html( Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_3week_2').html( Math.round((squatMax * 0.7)) + '<br>' + Math.round((squatMax * 0.8)) + '<br>' + Math.round((squatMax * 0.9)));
-            $('#squat_3week_3').html( Math.round(((Number(squatMax) + Number(squatInc)) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.85)));
+            $('#dead_3week_1').html(threeMax.weekOne(deadMax, deadInc)); 
+            $('#dead_3week_2').html(threeMax.weekTwo(deadMax, deadInc));
+            $('#dead_3week_3').html(threeMax.weekThree(deadMax, deadInc));
+            
+            $('#bench_3week_1').html(threeMax.weekOne(benchMax, benchInc));
+            $('#bench_3week_2').html(threeMax.weekTwo(benchMax, benchInc));
+            $('#bench_3week_3').html(threeMax.weekThree(benchMax, benchInc));
+            
+            $('#squat_3week_1').html(threeMax.weekOne(squatMax, squatInc));
+            $('#squat_3week_2').html(threeMax.weekTwo(squatMax, squatInc));
+            $('#squat_3week_3').html(threeMax.weekThree(squatMax, squatInc));
             break;
         case "fiveMax":
-            $('#dead_3week_1').html( Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)));
-            $('#dead_3week_2').html( Math.round(((Number(deadMax) + Number(deadInc)) * 0.65)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.85)));
-            $('#dead_3week_3').html( Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.85))); //adds two sessions of the weight increase
-
-            $('#bench_3week_1').html( Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_3week_2').html( Math.round(((Number(benchMax) + Number(benchInc)) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.85)));
-            $('#bench_3week_3').html( Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.85)));
-
-            $('#squat_3week_1').html( Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_3week_2').html( Math.round(((Number(squatMax) + Number(squatInc)) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.85)));
-            $('#squat_3week_3').html( Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.85)));
+            $('#dead_3week_1').html(fiveMax.weekOne(deadMax, deadInc)); 
+            $('#dead_3week_2').html(fiveMax.weekTwo(deadMax, deadInc));
+            $('#dead_3week_3').html(fiveMax.weekThree(deadMax, deadInc));
+            
+            $('#bench_3week_1').html(fiveMax.weekOne(benchMax, benchInc));
+            $('#bench_3week_2').html(fiveMax.weekTwo(benchMax, benchInc));
+            $('#bench_3week_3').html(fiveMax.weekThree(benchMax, benchInc));
+            
+            $('#squat_3week_1').html(fiveMax.weekOne(squatMax, squatInc));
+            $('#squat_3week_2').html(fiveMax.weekTwo(squatMax, squatInc));
+            $('#squat_3week_3').html(fiveMax.weekThree(squatMax, squatInc));
             break;
         }
-    } else{ //for three day chart
+    } else{ //for four day chart
         switch($('input[name=repMax]:checked').attr('id')){
         case "oneMax":
-            $('#OHP_4week_1').html( Math.round((ohpMax * 0.65)) + '<br>' + Math.round((ohpMax * 0.75)) + '<br>' + Math.round((ohpMax * 0.85)));
-            $('#OHP_4week_2').html( Math.round((ohpMax * 0.7)) + '<br>' + Math.round((ohpMax * 0.8)) + '<br>' + Math.round((ohpMax * 0.9)));
-            $('#OHP_4week_3').html( Math.round((ohpMax * 0.75)) + '<br>' + Math.round((ohpMax * 0.85)) + '<br>' + Math.round((ohpMax * 0.95)));
+            $('#OHP_4week_1').html(oneMax.weekOne(ohpMax, ohpInc)); 
+            $('#OHP_4week_2').html(oneMax.weekTwo(ohpMax, ohpInc));
+            $('#OHP_4week_3').html(oneMax.weekThree(ohpMax, ohpInc));
             
-            $('#dead_4week_1').html(Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)));
-            $('#dead_4week_2').html(Math.round((deadMax * 0.7)) + '<br>' + Math.round((deadMax * 0.8)) + '<br>' + Math.round((deadMax * 0.9)));
-            $('#dead_4week_3').html(Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)) + '<br>' + Math.round((deadMax * 0.95)));
+            $('#dead_4week_1').html(oneMax.weekOne(deadMax, deadInc)); 
+            $('#dead_4week_2').html(oneMax.weekTwo(deadMax, deadInc));
+            $('#dead_4week_3').html(oneMax.weekThree(deadMax, deadInc));
+
+            $('#bench_4week_1').html(oneMax.weekOne(benchMax, benchInc));
+            $('#bench_4week_2').html(oneMax.weekTwo(benchMax, benchInc));
+            $('#bench_4week_3').html(oneMax.weekThree(benchMax, benchInc));
             
-            $('#bench_4week_1').html(Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_4week_2').html(Math.round((benchMax * 0.7)) + '<br>' + Math.round((benchMax * 0.8)) + '<br>' + Math.round((benchMax * 0.9)));
-            $('#bench_4week_3').html(Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)) + '<br>' + Math.round((benchMax * 0.95)));
-            
-            $('#squat_4week_1').html(Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_4week_2').html(Math.round((squatMax * 0.7)) + '<br>' + Math.round((squatMax * 0.8)) + '<br>' + Math.round((squatMax * 0.9)));
-            $('#squat_4week_3').html(Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)) + '<br>' + Math.round((squatMax * 0.95)));
+            $('#squat_4week_1').html(oneMax.weekOne(squatMax, squatInc));
+            $('#squat_4week_2').html(oneMax.weekTwo(squatMax, squatInc));
+            $('#squat_4week_3').html(oneMax.weekThree(squatMax, squatInc));
             break;
         case "threeMax":
-            $('#OHP_4week_1').html( Math.round((ohpMax * 0.65)) + '<br>' + Math.round((ohpMax * 0.75)) + '<br>' + Math.round((ohpMax * 0.85)));
-            $('#OHP_4week_2').html( Math.round((ohpMax * 0.7)) + '<br>' + Math.round((ohpMax * 0.8)) + '<br>' + Math.round((ohpMax * 0.9)));
-            $('#OHP_4week_3').html( Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.65)) + '<br>' + Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.75)) + '<br>' + Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.85)));
-
-            $('#dead_4week_1').html( Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)));
-            $('#dead_4week_2').html( Math.round((deadMax * 0.7)) + '<br>' + Math.round((deadMax * 0.8)) + '<br>' + Math.round((deadMax * 0.9)));
-            $('#dead_4week_3').html( Math.round((Number(deadMax) + Number(deadInc)) * 0.65) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.85)));
-
-            $('#bench_4week_1').html( Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_4week_2').html( Math.round((benchMax * 0.7)) + '<br>' + Math.round((benchMax * 0.8)) + '<br>' + Math.round((benchMax * 0.9)));
-            $('#bench_4week_3').html( Math.round(((Number(benchMax) + Number(benchInc)) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.85)));
-
-            $('#squat_4week_1').html( Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_4week_2').html( Math.round((squatMax * 0.7)) + '<br>' + Math.round((squatMax * 0.8)) + '<br>' + Math.round((squatMax * 0.9)));
-            $('#squat_4week_3').html( Math.round(((Number(squatMax) + Number(squatInc)) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.85)));
+            $('#OHP_4week_1').html(threeMax.weekOne(ohpMax, ohpInc)); 
+            $('#OHP_4week_2').html(threeMax.weekTwo(ohpMax, ohpInc));
+            $('#OHP_4week_3').html(threeMax.weekThree(ohpMax, ohpInc));
+            
+            $('#dead_4week_1').html(threeMax.weekOne(deadMax, deadInc)); 
+            $('#dead_4week_2').html(threeMax.weekTwo(deadMax, deadInc));
+            $('#dead_4week_3').html(threeMax.weekThree(deadMax, deadInc));
+            
+            $('#bench_4week_1').html(threeMax.weekOne(benchMax, benchInc));
+            $('#bench_4week_2').html(threeMax.weekTwo(benchMax, benchInc));
+            $('#bench_4week_3').html(threeMax.weekThree(benchMax, benchInc));
+            
+            $('#squat_4week_1').html(threeMax.weekOne(squatMax, squatInc));
+            $('#squat_4week_2').html(threeMax.weekTwo(squatMax, squatInc));
+            $('#squat_4week_3').html(threeMax.weekThree(squatMax, squatInc));
             break;
         case "fiveMax":
-            $('#OHP_4week_1').html( Math.round((ohpMax * 0.65)) + '<br>' + Math.round((ohpMax * 0.75)) + '<br>' + Math.round((ohpMax * 0.85)));
-            $('#OHP_4week_2').html( Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.65)) + '<br>' + Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.75)) + '<br>' + Math.round(((Number(ohpMax) + Number(ohpInc)) * 0.85)));
-            $('#OHP_4week_3').html( Math.round(((Number(ohpMax) + Number(ohpInc) *2) * 0.65)) + '<br>' + Math.round((Number(ohpMax) + Number(ohpInc) *2) * 0.75) + '<br>' + Math.round((Number(ohpMax) + Number(ohpInc) *2) * 0.85));
-
-            $('#dead_4week_1').html( Math.round((deadMax * 0.65)) + '<br>' + Math.round((deadMax * 0.75)) + '<br>' + Math.round((deadMax * 0.85)));
-            $('#dead_4week_2').html( Math.round(((Number(deadMax) + Number(deadInc)) * 0.65)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc)) * 0.85)));
-            $('#dead_4week_3').html( Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(deadMax) + Number(deadInc) * 2) * 0.85)));
-
-            $('#bench_4week_1').html( Math.round((benchMax * 0.65)) + '<br>' + Math.round((benchMax * 0.75)) + '<br>' + Math.round((benchMax * 0.85)));
-            $('#bench_4week_2').html( Math.round(((Number(benchMax) + Number(benchInc)) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc)) * 0.85)));
-            $('#bench_4week_3').html( Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(benchMax) + Number(benchInc) * 2) * 0.85)));
-
-            $('#squat_4week_1').html( Math.round((squatMax * 0.65)) + '<br>' + Math.round((squatMax * 0.75)) + '<br>' + Math.round((squatMax * 0.85)));
-            $('#squat_4week_2').html( Math.round(((Number(squatMax) + Number(squatInc)) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc)) * 0.85)));
-            $('#squat_4week_3').html( Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.65)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.75)) + '<br>' + Math.round(((Number(squatMax) + Number(squatInc) * 2) * 0.85)));
+            $('#OHP_4week_1').html(fiveMax.weekOne(ohpMax, ohpInc)); 
+            $('#OHP_4week_2').html(fiveMax.weekTwo(ohpMax, ohpInc));
+            $('#OHP_4week_3').html(fiveMax.weekThree(ohpMax, ohpInc));
+            
+            $('#dead_4week_1').html(fiveMax.weekOne(deadMax, deadInc)); 
+            $('#dead_4week_2').html(fiveMax.weekTwo(deadMax, deadInc));
+            $('#dead_4week_3').html(fiveMax.weekThree(deadMax, deadInc));
+            
+            $('#bench_4week_1').html(fiveMax.weekOne(benchMax, benchInc));
+            $('#bench_4week_2').html(fiveMax.weekTwo(benchMax, benchInc));
+            $('#bench_4week_3').html(fiveMax.weekThree(benchMax, benchInc));
+            
+            $('#squat_4week_1').html(fiveMax.weekOne(squatMax, squatInc));
+            $('#squat_4week_2').html(fiveMax.weekTwo(squatMax, squatInc));
+            $('#squat_4week_3').html(fiveMax.weekThree(squatMax, squatInc));
             break;
         }
     }
