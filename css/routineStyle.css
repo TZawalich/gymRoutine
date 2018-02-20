@@ -1,0 +1,177 @@
+body{ 
+  color: #000;
+  font-size: 1em;
+  font-family: verdana, trebuchet, arial, sans-serif;
+  text-align: left;
+}
+
+td, th, tr{
+	border: 2px solid #000;
+}
+
+table{
+	border-collapse: collapse;
+	empty-cells: show;
+	margin: 0 auto;
+	width: 100%;
+}
+#dead_3week_a, #bench_3week_a, #squat_3week_a, #OHP_4week_a, #bench_4week_a, #squat_4week_a, #dead_4week_a{
+	cursor: pointer;
+}
+
+#dead_3week_a:hover, #bench_3week_a:hover, #squat_3week_a:hover, #OHP_4week_a:hover, #bench_4week_a:hover, #squat_4week_a:hover, #dead_4week_a:hover{
+	background-color: #AAE6FC;
+}
+.selectedAccessory{
+	background-color: #AAE6FC;
+	font-weight: bold;
+}
+
+#wrapper{
+	width: 80%;
+	margin: auto;
+}
+
+#banner{
+	text-align: center;
+}
+
+#routineHolder{
+	width: 80%;
+	margin: auto;
+}
+
+#three_day_tab, #four_day_tab{
+	display: inline-block;
+	border: 2px solid #000;
+	padding: 5px 10px 5px 10px;
+	margin-bottom: -2px;
+	cursor: pointer;
+}
+
+.clickedTab{
+	border-bottom: 2px solid #fff !important;
+	z-index: 5;
+	font-weight: bold;
+}
+
+#optionsHolder{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#maxRepOptions{
+	display: inline-block;
+	border: 2px solid #000;
+	margin: 30px;
+	padding: 20px;
+	vertical-align: top;
+	text-align: left;
+}
+		#maxRepOptions input, #allMaxReps div, #weightIncreaseHolder div{
+			margin-bottom: 5px;
+		}
+
+#allMaxReps{
+	display: inline-block;
+	border: 2px solid #000;
+	margin: 30px;
+	padding: 20px;
+	text-align: left;
+}
+
+#weightIncreaseHolder{
+	display: inline-block;
+	border: 2px solid #000;
+	margin: 30px;
+	padding: 20px;
+	text-align: left;
+}
+
+#calculateTable{
+	font-weight: bold;
+	font-size: 1.3em;
+	display: block;
+	text-align: center;
+}
+		#calculateTable p{
+			border: 2px solid #000;
+			padding: 10px 15px 10px 15px;
+			display: inline-block;
+			cursor: pointer;
+			margin-top: 0;
+		}
+		#calculateTable p:hover{
+			color: #fff;
+			background: #000;
+		}
+
+#accessoryHolder{
+	text-align: center;
+}
+.categoryLists{
+	display: inline-block;
+	vertical-align: top;
+	min-width: 30%;
+	margin-bottom: 40px;
+	text-align: center;
+}
+		.categoryLists ul{
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+.listCategory{
+	list-style: none;
+	margin: 8px 0 8px 0;
+	padding: 6px 0 6px 0;
+	border: 1px solid #000;
+}
+		.listCategory > ul{
+			list-style: none;
+			padding: 0;
+		}
+		
+
+.categoryTitle{
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.listTitle{
+	font-weight: bold;
+}
+
+.listItem{
+	margin: 8px 0 8px 0;
+	padding-top: 8px;
+	border-top: 1px solid #000;
+}
+
+.addItem, .removeItem{
+	background-color: #0ec402;
+	padding: 0 4px 0 4px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin: 8px;
+	cursor: pointer;
+	font-weight: bold;
+}
+		.addItem:hover, .removeItem:hover{
+			background-color: #ff0000;
+			color: #fff;
+		}
+
+.toggleHolder{
+	font-weight: normal;
+	margin: 5px 0 5px 0;
+	background-color: #ff7800;
+	padding: 2px 3px 2px 3px;
+	cursor: pointer;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+		.toggleHolder:hover{
+			background-color: blue;
+			color: #fff;
+		}
